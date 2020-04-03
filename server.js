@@ -1,7 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const logger = require('./middleware/logger')
 const app = express();
 
+app.use(logger);
 // Load the env variables.....
 dotenv.config({ path: './config/config.env' });
 
