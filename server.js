@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const errorHandler = require('./middleware/error')
 
 const connectDB = require('./config/db')
 
@@ -28,6 +29,9 @@ connectDB();
 //Mount the routers.....
 app.use('/api/v1/bootcamps',bootcamps)
 
+// Using the custom error handeling and it must be after the  app.use('/api/v1/bootcamps',bootcamps)
+// Reason for that becoz we are using next() in the route controllers to pass that error to the middleware
+app.use(errorHandler)
 
 const PORT =  5000;
 
