@@ -6,12 +6,11 @@ const errorHandler = require('./middleware/error')
 
 const connectDB = require('./config/db')
 
+// Load the env variables.....
+dotenv.config({ path: './config/config.env' });
 
 // Route file.....
 const bootcamps = require('./routes/bootcamps');
-
-// Load the env variables.....
-dotenv.config({ path: './config/config.env' });
 
 const app = express();
 
