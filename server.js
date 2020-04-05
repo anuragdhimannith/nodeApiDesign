@@ -11,6 +11,7 @@ dotenv.config({ path: './config/config.env' });
 
 // Route file.....
 const bootcamps = require('./routes/bootcamps');
+const courses = require('./routes/courses');
 
 const app = express();
 
@@ -27,6 +28,7 @@ connectDB();
 
 //Mount the routers.....
 app.use('/api/v1/bootcamps',bootcamps)
+app.use('/api/v1/courses',courses)
 
 // Using the custom error handeling and it must be after the  app.use('/api/v1/bootcamps',bootcamps)
 // Reason for that becoz we are using next() in the route controllers to pass that error to the middleware
