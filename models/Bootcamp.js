@@ -115,7 +115,8 @@ const BootcampSchema = new mongoose.Schema(
       formattedAddress: loc[0].formattedAddress,
       street: loc[0].streetName,
       city: loc[0].city,
-      state: loc[0].zipcode,
+      state: loc[0].stateCode,
+      zipcode: loc[0].zipcode,
       country: loc[0].countryCode
     
     }
