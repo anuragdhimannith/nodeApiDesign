@@ -1,8 +1,10 @@
+const path = require('path')
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
-const errorHandler = require('./middleware/error')
+const errorHandler = require('./middleware/error');
+const fileupload = require('express-fileupload') 
 
 const connectDB = require('./config/db')
 
@@ -12,6 +14,7 @@ dotenv.config({ path: './config/config.env' });
 // Route file.....
 const bootcamps = require('./routes/bootcamps');
 const courses = require('./routes/courses');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -25,10 +28,17 @@ app.use(express.json())
 // Connecting the db 
 connectDB();
 
+// File uploading
+app.use(fileupload());
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 //Mount the routers.....
 app.use('/api/v1/bootcamps',bootcamps)
 app.use('/api/v1/courses',courses)
+app.use('/api/v1/auth',auth)
 
 // Using the custom error handeling and it must be after the  app.use('/api/v1/bootcamps',bootcamps)
 // Reason for that becoz we are using next() in the route controllers to pass that error to the middleware
